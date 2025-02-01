@@ -1,0 +1,17 @@
+### GET request to example server
+POST http://localhost:8080/consultants
+Content-Type: application/json
+
+{
+  "email": "consultant1@service.com",
+  "nickName": "consultant",
+  "name": "consult",
+  "password": "password",
+  "confirmedPassword": "password",
+  "gender": "MALE",
+  "phoneNumber": "821012345678",
+  "birthday": "2000-01-01",
+  "role": "ROLE_CONSULTANT"
+}
+
+###

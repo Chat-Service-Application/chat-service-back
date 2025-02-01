@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultants</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link href="/main.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+  <script src="/consultants/stomp.js"></script>
+  <style>
+    body {
+      background-color: #f7f7f7;
+      font-family: 'Arial', sans-serif;
+    }
+    #main-content {
+      margin-top: 30px;
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      color: #333;
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .form-control {
+      border-radius: 30px;
+      padding: 12px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+    }
+    .btn {
+      border-radius: 30px;
+      padding: 10px 20px;
+      font-size: 16px;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .btn-default {
+      background-color: #007bff;
+      color: white;
+      border: none;
+    }
+    .btn-default:hover {
+      background-color: #0056b3;
+    }
+    .btn-default:disabled {
+      background-color: #dcdcdc;
+      color: #808080;
+    }
+    .btn-success {
+      background-color: #28a745;
+      color: white;
+      border: none;
+    }
+    .btn-success:hover {
+      background-color: #218838;
+    }
+    .btn-warning {
+      background-color: #ffc107;
+      color: white;
+      border: none;
+    }
+    .btn-warning:hover {
+      background-color: #e0a800;
+    }
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: #f9f9f9;
+    }
+    .table-striped tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+    #chatrooms, #conversation {
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+    table th, table td {
+      text-align: center;
+      padding: 12px;
+    }
+    table thead {
+      background-color: #007bff;
+      color: white;
+    }
+    #message {
+      border-radius: 30px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+<noscript>
+  <h2 style="color: #ff0000; text-align: center;">Seems your browser doesn't support Javascript! Websocket relies on Javascript being enabled. Please enable Javascript and reload this page!</h2>
+</noscript>
+<div id="main-content" class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="connect" style="font-size: 18px; color: #333;">WebSocket connection:</label>
+          <button id="connect" class="btn btn-default" type="button">Connect</button>
+          <button id="disconnect" class="btn btn-warning" disabled="disabled" type="button">Disconnect</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="create" style="font-size: 18px; color: #333;">Chatroom</label>
+          <input type="text" id="chatroom-id" class="form-control" disabled="disabled" placeholder="chatroom id">
+          <input type="text" id="chatroom-title" class="form-control" placeholder="chatroom title">
+        </div>
+        <button id="create" class="btn btn-success" disabled="disabled" type="button">Create</button>
+        <button id="leave" class="btn btn-warning" disabled="disabled" type="button">Leave</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table id="chatrooms" class="table table-striped">
+        <thead>
+        <tr>
+          <th>Chatrooms</th>
+        </tr>
+        </thead>
+        <tbody id="chatroom-list"></tbody>
+      </table>
+      <button id="prev" class="btn btn-default" disabled="disabled" type="button">Prev</button>
+      <button id="next" class="btn btn-default" disabled="disabled" type="button">Next</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="send" style="font-size: 18px; color: #333;">Message</label>
+          <input type="text" id="message" class="form-control" placeholder="message to send">
+        </div>
+        <button id="send" class="btn btn-default" disabled="disabled" type="button">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table id="conversation" class="table table-striped">
+        <thead>
+        <tr>
+          <th>Messages</th>
+        </tr>
+        </thead>
+        <tbody id="messages"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>
